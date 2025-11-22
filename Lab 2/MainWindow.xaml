@@ -1,0 +1,408 @@
+﻿<Window x:Class="Lab_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_2"
+        xmlns:vm="clr-namespace:Lab_2.ViewModels"
+        mc:Ignorable="d"
+        Title="Game Library - XML Parser" 
+        Height="800" Width="1400"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#667eea"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,6"/> <Setter Property="Margin" Value="3"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#5568d3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Background" Value="#48bb78"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#38a169"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Background" Value="#f56565"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#e53e3e"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="#667eea"/>
+            <Setter Property="BorderThickness" Value="1"/> <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#2d3748"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderBrush" Value="#cbd5e0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    <RowDefinition Height="Auto"/> </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#667eea" CornerRadius="8" Padding="15,10" Margin="0,0,0,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock Text="🎮 Game Library - XML Parser &amp; Manager" 
+                               FontSize="22" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Text="SAX • DOM • LINQ to XML | Factory Method | MVVM" 
+                               FontSize="11" Foreground="#e0e7ff" Margin="0,2,0,0"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                     <TextBlock Text="{Binding GoogleDriveStatus}" Foreground="#fbbf24" 
+                                VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold"/>
+                     <Button Content="🔌 Підключити Drive" Command="{Binding ConnectGoogleDriveCommand}"
+                             Background="#48bb78" Foreground="White" FontSize="11" Padding="8,4"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>   <ColumnDefinition Width="Auto"/> </Grid.ColumnDefinitions>
+
+            <GroupBox Grid.Column="0" Header="📁 Вхідні дані" Margin="0,0,5,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="XML:" VerticalAlignment="Center" Margin="5,0"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentXmlPath, Mode=OneWay}" IsReadOnly="True" Background="#f7fafc"/>
+                    <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Margin="5,0,0,0">
+                        <Button Content="📂" ToolTip="Локальний файл" Command="{Binding SelectXmlFileCommand}" Style="{StaticResource PrimaryButton}" Width="35"/>
+                        <Button Content="☁️" ToolTip="Google Drive" Command="{Binding LoadXmlFromDriveCommand}" Style="{StaticResource PrimaryButton}" Width="35"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="XSL:" VerticalAlignment="Center" Margin="5,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentXslPath, Mode=OneWay}" IsReadOnly="True" Background="#f7fafc"/>
+                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="5,0,0,0">
+                        <Button Content="📂" ToolTip="Локальний файл" Command="{Binding SelectXslFileCommand}" Style="{StaticResource PrimaryButton}" Width="35"/>
+                        <Button Content="☁️" ToolTip="Google Drive" Command="{Binding LoadXslFromDriveCommand}" Style="{StaticResource PrimaryButton}" Width="35"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Column="1" Header="⚙️ Обробка">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <ComboBox SelectedIndex="{Binding SelectedParserIndex}" Width="140" Margin="5" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="SAX (XmlReader)"/>
+                        <ComboBoxItem Content="DOM (XmlDocument)"/>
+                        <ComboBoxItem Content="LINQ to XML"/>
+                    </ComboBox>
+                    <Button Content="🔄 Трансформувати" Command="{Binding TransformFullCommand}" Style="{StaticResource SecondaryButton}" Margin="5,0"/>
+                    <Button Content="📋 Лог" Command="{Binding OpenLogCommand}" Style="{StaticResource PrimaryButton}"/>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/> <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="0,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="🔍 Фільтри пошуку" Grid.Row="0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="0,0,5,0">
+                        <Grid Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Margin" Value="0,0,10,5"/>
+                                    <Setter Property="Foreground" Value="#4a5568"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                </Style>
+                            </Grid.Resources>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Платформа:"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailablePlatforms}" SelectedItem="{Binding SelectedPlatform}" Margin="0,0,0,5"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Мультиплеєр:"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" SelectedValuePath="Content" SelectedValue="{Binding SelectedMultiplayer}" Margin="0,0,0,5">
+                                <ComboBoxItem Content="(Всі)"/>
+                                <ComboBoxItem Content="Так"/>
+                                <ComboBoxItem Content="Ні"/>
+                            </ComboBox>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Рейтинг:"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding AvailableRatings}" SelectedItem="{Binding SelectedRating}" Margin="0,0,0,5"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Назва:"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding TitleKeyword, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
+
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Жанр:"/>
+                            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding GenreKeyword, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
+
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Розробник:"/>
+                            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding DeveloperKeyword, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
+
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Видавець:"/>
+                            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding PublisherKeyword, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
+
+                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Ціна ($):"/>
+                            <Grid Grid.Row="9" Grid.Column="1" Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" Text="{Binding PriceFrom, UpdateSourceTrigger=PropertyChanged}" ToolTip="Від"/>
+                                <TextBlock Grid.Column="1" Text="-" VerticalAlignment="Center" Margin="5,0"/>
+                                <TextBox Grid.Column="2" Text="{Binding PriceTo, UpdateSourceTrigger=PropertyChanged}" ToolTip="До"/>
+                            </Grid>
+
+                            <TextBlock Grid.Row="10" Grid.Column="0" Text="Дата:"/>
+                            <Grid Grid.Row="10" Grid.Column="1" Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <DatePicker Grid.Column="0" SelectedDate="{Binding ReleaseDateFrom}" ToolTip="Від"/>
+                                <TextBlock Grid.Column="1" Text="-" VerticalAlignment="Center" Margin="5,0"/>
+                                <DatePicker Grid.Column="2" SelectedDate="{Binding ReleaseDateTo}" ToolTip="До"/>
+                            </Grid>
+
+                            <Grid Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Content="🔍 Знайти" Command="{Binding SearchCommand}" Style="{StaticResource PrimaryButton}" Margin="0,0,5,0"/>
+                                <Button Grid.Column="1" Content="✕" ToolTip="Очистити всі фільтри" Command="{Binding ClearCommand}" Style="{StaticResource DangerButton}" Width="40"/>
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </GroupBox>
+
+                <GroupBox Grid.Row="1" Header="💾 Збереження" Margin="0,5,0,0">
+                    <Grid Margin="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="На диск" HorizontalAlignment="Center" FontSize="11" FontWeight="Bold" Foreground="#667eea" Margin="0,0,0,5"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Google Drive" HorizontalAlignment="Center" FontSize="11" FontWeight="Bold" Foreground="#667eea" Margin="0,0,0,5"/>
+
+                        <StackPanel Grid.Row="1" Grid.Column="0">
+                            <Button Content="Зберегти XML" Command="{Binding SaveLocalXmlCommand}" Style="{StaticResource SecondaryButton}" Margin="2"/>
+                            <Button Content="Зберегти HTML" Command="{Binding SaveLocalHtmlCommand}" Style="{StaticResource SecondaryButton}" Margin="2"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="1">
+                            <Button Content="Зберегти XML" Command="{Binding SaveDriveXmlCommand}" Style="{StaticResource PrimaryButton}" Margin="2"/>
+                            <Button Content="Зберегти HTML" Command="{Binding SaveDriveHtmlCommand}" Style="{StaticResource PrimaryButton}" Margin="2"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="White" CornerRadius="5" Padding="10,5" Margin="0,0,0,5">
+                    <Grid>
+                        <TextBlock Text="{Binding ResultsHeader}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding SearchTime}" FontSize="12" Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Background="White" CornerRadius="5" Padding="5">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding SearchResults}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#f7fafc" CornerRadius="6" Padding="10" Margin="0,0,0,6" BorderBrush="#e2e8f0" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="#2d3748"/>
+                                                
+                                                <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                                    <WrapPanel.Resources>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="CornerRadius" Value="3"/>
+                                                            <Setter Property="Padding" Value="5,2"/>
+                                                            <Setter Property="Margin" Value="0,0,4,4"/>
+                                                        </Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                            <Setter Property="FontSize" Value="10"/>
+                                                            <Setter Property="FontWeight" Value="Bold"/>
+                                                        </Style>
+                                                    </WrapPanel.Resources>
+                                                    
+                                                    <Border Background="#667eea">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Platform}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Platform}" Value=""><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <TextBlock Text="{Binding Platform}"/>
+                                                    </Border>
+
+                                                    <Border Background="#805ad5">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Rating}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Rating}" Value=""><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <TextBlock Text="{Binding Rating}"/>
+                                                    </Border>
+
+                                                    <Border Background="#f6ad55">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Genre}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Genre}" Value=""><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <TextBlock Text="{Binding Genre}"/>
+                                                    </Border>
+                                                    
+                                                    <Border Background="#4facfe">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Multiplayer}" Value="True"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Multiplayer}" Value="true"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <TextBlock Text="Multiplayer"/>
+                                                    </Border>
+                                                </WrapPanel>
+
+                                                <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                                    <TextBlock FontSize="11" Foreground="#718096">
+                                                        <Run Text="Dev:" FontWeight="Bold"/>
+                                                        <Run Text="{Binding Developer}"/>
+                                                        <Run Text=" | "/>
+                                                        <Run Text="{Binding ReleaseDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                            <TextBlock Grid.Column="1" Text="{Binding Price, StringFormat='${0:F2}'}" 
+                                                       FontSize="20" FontWeight="Bold" Foreground="#667eea" 
+                                                       VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Border Grid.Row="3" Background="#2d3748" CornerRadius="3" Padding="5" Margin="0,5,0,0">
+            <TextBlock Text="{Binding StatusMessage}" Foreground="White" VerticalAlignment="Center" FontSize="11"/>
+        </Border>
+    </Grid>
+</Window>

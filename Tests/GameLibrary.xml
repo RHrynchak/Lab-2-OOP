@@ -1,0 +1,111 @@
+﻿<GameLibrary>
+	<!-- Game 1: 2 атрибути (id, platform) -->
+	<Game id="1" platform="PC">
+		<Title>The Witcher 3: Wild Hunt</Title>
+		<Developer>CD Projekt Red</Developer>
+		<Publisher>CD Projekt</Publisher>
+		<Genre>Action RPG</Genre>
+		<ReleaseDate>2015-05-19</ReleaseDate>
+		<Price>39.99</Price>
+		<Description>An open-world RPG set in a fantasy universe full of meaningful choices and impactful consequences.</Description>
+	</Game>
+
+	<!-- Game 2: 4 атрибути (id, platform, multiplayer, rating) -->
+	<Game id="2" platform="PlayStation" multiplayer="true" rating="T">
+		<Title>Spider-Man</Title>
+		<Developer>Insomniac Games</Developer>
+		<Publisher>Sony Interactive Entertainment</Publisher>
+		<Genre>Action-Adventure</Genre>
+		<ReleaseDate>2018-09-07</ReleaseDate>
+		<Price>49.99</Price>
+		<Description>Swing through New York City as Spider-Man and fight iconic villains.</Description>
+	</Game>
+
+	<!-- Game 3: 1 атрибут (id) -->
+	<Game id="3">
+		<Title>Minecraft</Title>
+		<Developer>Mojang Studios</Developer>
+		<Publisher>Microsoft</Publisher>
+		<Genre>Sandbox</Genre>
+		<ReleaseDate>2011-11-18</ReleaseDate>
+		<Price>26.95</Price>
+		<Description>A sandbox game where players can build and explore infinite worlds.</Description>
+	</Game>
+
+	<!-- Game 4: 2 атрибути (id, platform) -->
+	<Game id="4" platform="Xbox">
+		<Title>Halo Infinite</Title>
+		<Developer>343 Industries</Developer>
+		<Publisher>Xbox Game Studios</Publisher>
+		<Genre>First-Person Shooter</Genre>
+		<ReleaseDate>2021-12-08</ReleaseDate>
+		<Price>59.99</Price>
+		<Description>Master Chief returns in this epic sci-fi shooter.</Description>
+	</Game>
+
+	<!-- Game 5: 3 атрибути (id, platform, multiplayer) -->
+	<Game id="5" platform="PC" multiplayer="true">
+		<Title>Half-Life: Alyx</Title>
+		<Developer>Valve</Developer>
+		<Publisher>Valve</Publisher>
+		<Genre>VR Shooter</Genre>
+		<ReleaseDate>2020-03-23</ReleaseDate>
+		<Price>59.99</Price>
+		<Description>A VR masterpiece set between Half-Life and Half-Life 2.</Description>
+	</Game>
+
+	<!-- Game 6: 2 атрибути (id, platform) -->
+	<Game id="6" platform="Nintendo Switch">
+		<Title>The Legend of Zelda: Breath of the Wild</Title>
+		<Developer>Nintendo EPD</Developer>
+		<Publisher>Nintendo</Publisher>
+		<Genre>Action-Adventure</Genre>
+		<ReleaseDate>2017-03-03</ReleaseDate>
+		<Price>59.99</Price>
+		<Description>Explore a vast open world in this critically acclaimed Zelda adventure.</Description>
+	</Game>
+
+	<!-- Game 7: 3 атрибути (id, platform, multiplayer) -->
+	<Game id="7" platform="PC" multiplayer="true">
+		<Title>Fortnite</Title>
+		<Developer>Epic Games</Developer>
+		<Publisher>Epic Games</Publisher>
+		<Genre>Battle Royale</Genre>
+		<ReleaseDate>2017-07-25</ReleaseDate>
+		<Price>0.00</Price>
+		<Description>A free-to-play battle royale game with building mechanics.</Description>
+	</Game>
+
+	<!-- Game 8: 3 атрибути (id, platform, rating) -->
+	<Game id="8" platform="PC" rating="E">
+		<Title>Stardew Valley</Title>
+		<Developer>ConcernedApe</Developer>
+		<Publisher>ConcernedApe</Publisher>
+		<Genre>Simulation RPG</Genre>
+		<ReleaseDate>2016-02-26</ReleaseDate>
+		<Price>14.99</Price>
+		<Description>Build your dream farm in this charming indie farming simulator.</Description>
+	</Game>
+
+	<!-- Game 9: 1 атрибут (id) -->
+	<Game id="9">
+		<Title>Among Us</Title>
+		<Developer>InnerSloth</Developer>
+		<Publisher>InnerSloth</Publisher>
+		<Genre>Social Deduction</Genre>
+		<ReleaseDate>2018-06-15</ReleaseDate>
+		<Price>4.99</Price>
+		<Description>Find the impostor among your crew in this multiplayer game.</Description>
+	</Game>
+
+	<!-- Game 10: 3 атрибути (id, platform, multiplayer) -->
+	<Game id="10" platform="PC" multiplayer="true">
+		<Title>Elden Ring</Title>
+		<Developer>FromSoftware</Developer>
+		<Publisher>Bandai Namco Entertainment</Publisher>
+		<Genre>Action RPG</Genre>
+		<ReleaseDate>2022-02-25</ReleaseDate>
+		<Price>59.99</Price>
+		<Description>An epic dark fantasy action RPG from the creators of Dark Souls.</Description>
+	</Game>
+</GameLibrary>

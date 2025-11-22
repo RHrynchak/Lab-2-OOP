@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GameLibrary>
+  <Game platform="PC">
+    <Title>The Witcher 3: Wild Hunt</Title>
+    <Developer>CD Projekt Red</Developer>
+    <Publisher>CD Projekt</Publisher>
+    <Genre>Action RPG</Genre>
+    <ReleaseDate>2015-05-19</ReleaseDate>
+    <Price>39.99</Price>
+    <Description>An open-world RPG set in a fantasy universe full of meaningful choices and impactful consequences.</Description>
+  </Game>
+  <Game platform="PC" multiplayer="true">
+    <Title>Half-Life: Alyx</Title>
+    <Developer>Valve</Developer>
+    <Publisher>Valve</Publisher>
+    <Genre>VR Shooter</Genre>
+    <ReleaseDate>2020-03-23</ReleaseDate>
+    <Price>59.99</Price>
+    <Description>A VR masterpiece set between Half-Life and Half-Life 2.</Description>
+  </Game>
+  <Game platform="PC" multiplayer="true">
+    <Title>Fortnite</Title>
+    <Developer>Epic Games</Developer>
+    <Publisher>Epic Games</Publisher>
+    <Genre>Battle Royale</Genre>
+    <ReleaseDate>2017-07-25</ReleaseDate>
+    <Price>0.00</Price>
+    <Description>A free-to-play battle royale game with building mechanics.</Description>
+  </Game>
+  <Game platform="PC" rating="E">
+    <Title>Stardew Valley</Title>
+    <Developer>ConcernedApe</Developer>
+    <Publisher>ConcernedApe</Publisher>
+    <Genre>Simulation RPG</Genre>
+    <ReleaseDate>2016-02-26</ReleaseDate>
+    <Price>14.99</Price>
+    <Description>Build your dream farm in this charming indie farming simulator.</Description>
+  </Game>
+  <Game platform="PC" multiplayer="true">
+    <Title>Elden Ring</Title>
+    <Developer>FromSoftware</Developer>
+    <Publisher>Bandai Namco Entertainment</Publisher>
+    <Genre>Action RPG</Genre>
+    <ReleaseDate>2022-02-25</ReleaseDate>
+    <Price>59.99</Price>
+    <Description>An epic dark fantasy action RPG from the creators of Dark Souls.</Description>
+  </Game>
+</GameLibrary>
