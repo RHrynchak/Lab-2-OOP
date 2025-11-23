@@ -338,6 +338,12 @@ namespace Lab_2.ViewModels
         #endregion
 
         #region Command Implementations
+        private void ResetResults()
+        {
+            SearchResults.Clear();
+            ResultsHeader = "📊 Результати пошуку: 0 ігор";
+            SearchTime = string.Empty;
+        }
 
         private void SelectXmlFile()
         {
@@ -359,6 +365,7 @@ namespace Lab_2.ViewModels
                 }
                 CurrentXmlPath = openFileDialog.FileName;
                 LoadAvailableAttributes();
+                ResetResults();
                 StatusMessage = $"XML файл завантажено: {Path.GetFileName(CurrentXmlPath)}";
                 _logger.LogInfo($"Вибрано XML файл: {CurrentXmlPath}");
             }
@@ -416,6 +423,7 @@ namespace Lab_2.ViewModels
 
                     CurrentXmlPath = tempPath;
                     LoadAvailableAttributes();
+                    ResetResults();
 
                     StatusMessage = $"XML завантажено з Google Drive: {picker.SelectedFile.Name}";
                     _logger.LogInfo($"XML завантажено з Google Drive: {picker.SelectedFile.Name}");
